@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/01/09 15:23:40 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/01/31 16:25:49 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct  s_data
 	int			time_must_eat;
 	int		lock;
 	long long	start_time;
+	pthread_mutex_t	status;
 	pthread_mutex_t	lock_mutex;
 	pthread_mutex_t	eat_mutex;
 	pthread_mutex_t	time_to_eat_mutex;

@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:20 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/01/09 15:40:52 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/01/31 20:40:02 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	init_threads(t_data *data)
 	pthread_mutex_init(&data->lock_mutex, NULL);
 	pthread_mutex_init(&data->eat_mutex, NULL);
 	pthread_mutex_init(&data->time_to_eat_mutex, NULL);
-
+	data->start_time = get_time();
 	while (data->philo_nb > 0)
 	{
 		pthread_create(&aux->thread, NULL, (void *)&daily_activities, aux);
@@ -52,7 +52,7 @@ void	miliseconds_sleep(int time_in_ms)
 		usleep(10);
 }
 
-long	current_time(void)
+long long	get_time(void)
 {
 	struct timeval	time;
 
@@ -60,26 +60,124 @@ long	current_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-long	past_time(long time_started)
+long	past_time(t_data *data)
 {
-	return (current_time() - time_started);
+	return (get_time() - data->start_time);
 }
 
-void	fork_lock()
+// void	fork_lock(t_list *list)
+// {
+// 	if (verify_mutex_stop(list->data))
+// 	{
+// 		pthread_mutex_lock(&list->fork);
+// 		pthread_mutex_lock(&list->data->status);
+// 		if (verify_mutex_stop(list->data))
+// 			printf("%lli %i has taken a fork\n", past_time(list->data->start_time), list->philo_id);
+// 		pthread_mutex_unlock(&list->data->status);
+// 		if (list->data->philo_nb == 1)
+// 		{
+// 			while(verify_mutex_stop(list->data))
+// 				usleep(1000);
+// 			pthread_mutex_unlock(&list->fork);
+// 			return ;
+// 		}
+// 		pthread_mutex_lock(&list->prev->fork);
+// 		pthread_mutex_lock(&list->data->status);
+// 		if (verify_mutex_stop(list->data))
+// 			printf("%lli %i has taken a fork\n", past_time(list->data->start_time), list->philo_id);
+// 	}
+// }
+
+void	just_one_philo(t_list *list)
+{
+	if (list->data->philo_nb == 1)
+	{
+		while(verify_mutex_stop(list->data))
+			usleep(1000);
+		pthread_mutex_unlock(&list->fork);
+		return ;
+	}
+}
+
+void	fork_lock(t_list *list)
+{
+	if(!verify_mutex_stop(list->data))
+		return ;
+	pthread_mutex_lock(&list->fork);
+	pthread_mutex_lock(&list->data->status);
+	if (!verify_mutex_stop(list->data))
+	{
+		pthread_mutex_unlock(&list->data->status);
+		pthread_mutex_unlock(&list->fork);
+		return ;
+	}
+	printf("%lli %i has taken a fork\n", past_time(list->data->start_time), list->philo_id);
+	just_one_philo(list);
+	// if (list->data->philo_nb == 1)
+	// {
+	// 	while(verify_mutex_stop(list->data))
+	// 		usleep(1000);
+	// 	pthread_mutex_unlock(&list->fork);
+	// 	return ;
+	// }
+	pthread_mutex_lock(&list->prev->prev->fork);
+	pthread_mutex_lock(&list->data->status);
+	if (!verify_mutex_stop(list->data))
+	{
+		pthread_mutex_unlock(&list->data->status);
+		pthread_mutex_unlock(&list->prev->fork);
+		pthread_mutex_unlock(&list->fork);
+		return ;
+	}
+	printf("%lli %i has taken a fork\n", past_time(list->data->start_time), list->philo_id);
+	pthread_mutex_unlock(&list->data->status);
+}
+
+void	fork_unlock(t_list *list)
+{
+	pthread_mutex_unlock(&list->prev->fork);
+	pthread_mutex_unlock(&list->fork);
+}
+
+int		amount_of_times_eat(t_data *data)
 {
 	
+}
+void	philo_eating(t_list *list)
+{
+	if (!verify_mutex_stop(list->data))
+		return ;
+	pthread_mutex_lock(&list->data->time_to_eat_mutex);
+	list->last_meal = get_time();
+	pthread_mutex_lock(&list->data->time_to_eat_mutex);
+	pthread_mutex_lock(&list->data->status);
+	if (verify_mutex_stop(list->data))
+		printf("%lli %d is eating\n", past_time(list->data), list->philo_id);
+	pthread_mutex_lock(&list->data->eat_mutex);
+	list->eat_counter++;
+	pthread_mutex_unlock(&list->data->eat_mutex);
+	amount_of_times_eat(list->data);
+	pthread_mutex_unlock(&list->data->status);
+	if (verify_mutex_stop(list->data))
+		usleep(list->data->time_to_eat * 1000);
 }
 
 void	*daily_activities(t_list *list, t_data *data)
 {
 	pthread_mutex_lock(&list->data->time_to_eat_mutex);
-	list->last_meal = current_time();
+	list->last_meal = get_time();
 	pthread_mutex_unlock(&list->data->time_to_eat_mutex);
 	if (list->philo_id % 2 == 0)
 		miliseconds_sleep(5);
-	while (verify_mutex_stop(list->data) && (list->eat_counter < list->data->time_must_eat || list->data->time_must_eat == -1))
+	while (verify_mutex_stop(list->data))
 	{
-		
+		if ((list->eat_counter < list->data->time_must_eat || list->data->time_must_eat == -1))
+			break ;
+		fork_lock(list);
+		if (verify_mutex_stop(list->data) == 0)
+			break ;
+		philo_eating(list);
+		fork_unlock(list);
 	}
 	
 }
