@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: maclara- <maclara-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/02/24 18:28:41 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 20:18:11 by maclara-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+typedef struct s_list	t_list;
+typedef struct s_data	t_data;
 
 typedef struct  s_list
 {
