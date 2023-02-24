@@ -6,7 +6,7 @@
 #    By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 16:27:16 by gissao-m          #+#    #+#              #
-#    Updated: 2022/12/28 18:15:32 by gissao-m         ###   ########.fr        #
+#    Updated: 2023/02/24 18:29:59 by gissao-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,14 @@ PATH_OBJS = ./objs/
 
 SRC =	$(PATH_MAIN)main.c \
 		$(PATH_MAIN)libft_utils.c \
+		$(PATH_MAIN)check.c \
+		$(PATH_MAIN)eat.c \
+		$(PATH_MAIN)fork.c \
+		$(PATH_MAIN)free.c \
+		$(PATH_MAIN)init_struct.c \
+		$(PATH_MAIN)init_thread.c \
+		$(PATH_MAIN)mutex.c \
+		$(PATH_MAIN)time.c \
 		$(PATH_MAIN)validate_args.c \
 		
 

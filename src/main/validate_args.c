@@ -6,13 +6,13 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:15:35 by gissao-m          #+#    #+#             */
-/*   Updated: 2022/12/28 18:17:03 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:27:55 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	check_args(int	argc)
+static void	check_args(int	argc)
 {
 	if (argc < 5)
 	{
@@ -27,7 +27,7 @@ void	check_args(int	argc)
 		
 }
 
-int	is_number(char *argv[])
+static int	is_number(char *argv[])
 {
 	int	i;
 
@@ -60,4 +60,16 @@ void	validate_args(int argc, char *argv[])
 	check_args(argc);
 	if (is_number(argv))
 		exit (1);
+}
+
+void	collect_args(int argc, char *argv[], t_data *data)
+{
+	data->philo_nb = ft_atoi(argv[1]);
+	data->time_to_die = ft_atoi(argv[2]);
+	data->time_to_eat = ft_atoi(argv[3]);
+	data->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		data->time_must_eat = ft_atoi(argv[5]);
+	else
+		data->time_must_eat = -1;
 }

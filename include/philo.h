@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/01/31 16:25:49 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/02/24 18:28:41 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,20 @@ typedef struct  s_data
 	t_list	*list;
 }	t_data;
 
-int		ft_str_is_numeric(char *str);
-int		ft_atoi(const char *str);
-void	init_data(t_data *data);
-int		verify_mutex_stop(t_data *data);
+int			ft_str_is_numeric(char *str);
+void		validate_args(int argc, char *argv[]);
+int			ft_atoi(const char *str);
+void		init_data(t_data *data);
+int			verify_mutex_stop(t_data *data);
+void		collect_args(int argc, char *argv[], t_data *data);
+long		past_time(t_data *data);
+long long	get_time(void);
+void		miliseconds_sleep(int time_in_ms);
+void		philo_eating(t_list *list);
+void		check_die(t_data *data);
+void		fork_lock(t_list *list);
+void		fork_unlock(t_list *list);
+void		init_thread(t_data *data);
+void		free_philo(t_data *data);
 
 #endif
