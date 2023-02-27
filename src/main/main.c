@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:20 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/02/24 18:35:57 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:02:11 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int	main(int argc, char *argv[])
 	t_data	*data;
 	
 	//funcao para verificar se os argumentos passados estao passados de forma correta.
+	data = (t_data *) malloc (sizeof(t_data));
 	validate_args(argc, argv);
 	collect_args(argc, argv, data);
 	init_data(data);

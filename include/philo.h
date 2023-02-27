@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maclara- <maclara-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/02/24 20:18:11 by maclara-         ###   ########.fr       */
+/*   Updated: 2023/02/27 13:50:04 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct  s_data
 	pthread_mutex_t	status;
 	pthread_mutex_t	lock_mutex;
 	pthread_mutex_t	eat_mutex;
-	pthread_mutex_t	time_to_eat_mutex;
+	pthread_mutex_t	*time_to_eat_mutex;
 	t_list	*list;
 }	t_data;
 
@@ -56,7 +56,7 @@ int			ft_atoi(const char *str);
 void		init_data(t_data *data);
 int			verify_mutex_stop(t_data *data);
 void		collect_args(int argc, char *argv[], t_data *data);
-long		past_time(t_data *data);
+// long long		past_time(t_list *list);
 long long	get_time(void);
 void		miliseconds_sleep(int time_in_ms);
 void		philo_eating(t_list *list);
