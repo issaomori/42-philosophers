@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:20 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/01 19:41:39 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:22:04 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int	main(int argc, char *argv[])
 	init_data(data);
 	init_thread(data);
 	free_philo(data);
+	// free_mutex(data);
 	//primeiro passo eh transformar todos os argumentos que sao passados como strings para inteiro, e armazenar em variaveis correspondentes ás suas funcs.
 
 	//como esta func nao precisa existir necessariamente, atribuo ela numa cond, se existir ele faz, se nao existir continua normalmente tbm.
