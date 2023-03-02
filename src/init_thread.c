@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:22:37 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/02 19:22:05 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:52:29 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ void	philo_thinking(t_list *list)
 	pthread_mutex_unlock(list->data->status);
 }
 
-static void	*daily_activities(t_list *list, t_data *data)
+int	just_one_philo(t_list *list)
 {
-	pthread_mutex_lock(list->data->time_to_eat_mutex);
-	list->last_meal = get_time();
-	pthread_mutex_unlock(list->data->time_to_eat_mutex);
 	if (list->data->philo_nb == 1)
 	{
 		pthread_mutex_lock(&list->fork);
@@ -49,8 +46,18 @@ static void	*daily_activities(t_list *list, t_data *data)
 		get_time() - list->data->start_time, list->philo_id);
 		miliseconds_sleep(list->data->time_to_die);
 		pthread_mutex_unlock(&list->fork);
-		return (NULL);
+		return (0);
 	}
+	return (1);
+}
+
+static void	*daily_activities(t_list *list, t_data *data)
+{
+	pthread_mutex_lock(list->data->time_to_eat_mutex);
+	list->last_meal = get_time();
+	pthread_mutex_unlock(list->data->time_to_eat_mutex);
+	if (!just_one_philo(list))
+		return (NULL);
 	if (list->philo_id % 2 == 0)
 		miliseconds_sleep(list->data->time_to_eat - 5);
 		//deixa os filos pares dormindo, ate os impares terminarem 5 milisegundos antes de merendar.
@@ -65,6 +72,7 @@ static void	*daily_activities(t_list *list, t_data *data)
 		philo_sleeping(list);
 		philo_thinking(list);
 	}
+	return (NULL);
 }
 
 static void	create_thread(t_data *data, int nb_philo, t_list *temp)

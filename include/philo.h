@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/02 13:32:32 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:46:17 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,32 +22,32 @@
 typedef struct s_list	t_list;
 typedef struct s_data	t_data;
 
-typedef struct  s_list
+typedef struct s_list
 {
 	long long		last_meal;
 	int				philo_id;
 	int				eat_counter;
 	pthread_t		thread;
 	pthread_mutex_t	fork;
-	t_list  		*next;
-	t_list  		*prev;
+	t_list			*next;
+	t_list			*prev;
 	t_data			*data;
 }	t_list;
 
-typedef struct  s_data
+typedef struct s_data
 {
-	int     philo_nb;
-	int     time_to_die;
-	int     time_to_eat;
-	int     time_to_sleep;
-	int			time_must_eat;
-	int		lock;
-	long long	start_time;
+	int				philo_nb;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_must_eat;
+	int				lock;
+	long long		start_time;
 	pthread_mutex_t	*status;
 	pthread_mutex_t	*lock_mutex;
 	pthread_mutex_t	*eat_mutex;
 	pthread_mutex_t	*time_to_eat_mutex;
-	t_list	*list;
+	t_list			*list;
 }	t_data;
 
 int			ft_str_is_numeric(char *str);
