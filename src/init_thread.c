@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:22:37 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/02 19:52:29 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:30:52 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ void	philo_thinking(t_list *list)
 	pthread_mutex_unlock(list->data->status);
 }
 
-int	just_one_philo(t_list *list)
-{
-	if (list->data->philo_nb == 1)
-	{
-		pthread_mutex_lock(&list->fork);
-		printf("%lli %i has taken a fork\n", \
-		get_time() - list->data->start_time, list->philo_id);
-		miliseconds_sleep(list->data->time_to_die);
-		pthread_mutex_unlock(&list->fork);
-		return (0);
-	}
-	return (1);
-}
-
 static void	*daily_activities(t_list *list, t_data *data)
 {
 	pthread_mutex_lock(list->data->time_to_eat_mutex);
@@ -60,7 +46,6 @@ static void	*daily_activities(t_list *list, t_data *data)
 		return (NULL);
 	if (list->philo_id % 2 == 0)
 		miliseconds_sleep(list->data->time_to_eat - 5);
-		//deixa os filos pares dormindo, ate os impares terminarem 5 milisegundos antes de merendar.
 	while (verify_mutex_stop(list->data) && (list->eat_counter \
 	< list->data->time_must_eat || list->data->time_must_eat == -1))
 	{

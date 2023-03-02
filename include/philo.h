@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:25 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/02 19:46:17 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 20:29:01 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void		fork_lock(t_list *list);
 void		fork_unlock(t_list *list);
 void		init_thread(t_data *data);
 void		free_philo(t_data *data);
+int			just_one_philo(t_list *list);
 
 #endif
