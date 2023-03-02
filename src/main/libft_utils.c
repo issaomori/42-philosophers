@@ -6,31 +6,31 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 14:18:20 by gissao-m          #+#    #+#             */
-/*   Updated: 2022/12/28 18:12:54 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:58:40 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int    ft_str_is_numeric(char *str)
+int	ft_str_is_numeric(char *str)
 {
-    int    i;
+	int	i;
 
-    i = 0;
-    if (str[i] == '\0')
-        return (1);
+	i = 0;
+	if (str[i] == '\0')
+		return (1);
 	if (str[0] == '+')
-        i++;
-    while (str[i] != '\0')
-    {
-        while (str[i] >= 48 && str[i] <= 57)
-            i++;
-        if (str[i] == '\0')
-            return (1);
-        else
-            return (0);
-    }
-    return (0);
+		i++;
+	while (str[i] != '\0')
+	{
+		while (str[i] >= 48 && str[i] <= 57)
+			i++;
+		if (str[i] == '\0')
+			return (1);
+		else
+			return (0);
+	}
+	return (0);
 }
 
 int	ft_isdigit(int i)

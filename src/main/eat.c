@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:14:19 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/01 12:50:31 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:48:35 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	nb_times_eat(t_list *list)
 {
 	pthread_mutex_lock(list->data->eat_mutex);
-	//ESTAVA SEM  E TAVA DANDO ERRO, PRECISA TESTAR!!
 	if (list->eat_counter != list->data->time_must_eat)
 	{
 		pthread_mutex_unlock(list->data->eat_mutex);
@@ -27,19 +26,15 @@ static int	nb_times_eat(t_list *list)
 
 static int	amount_of_times_eat(t_data *data)
 {
-	t_list *list = data->list;
+	t_list	*list;
 
-// Adicionamos um loop infinito para iterar sobre os filósofos.
+	list = data->list;
 	while (1)
 	{
 		if (nb_times_eat(list))
-			return 0;
-
-		//adicionamos a verificação do ID do filósofo ao primeiro if. Isso nos permite tratar o primeiro filósofo de maneira diferente dos outros.
+			return (0);
 		if (list->philo_id == data->philo_nb)
-			break;
-		// Adicionamos um break para sair do loop quando chegarmos ao último filósofo.
-
+			break ;
 		list = list->next;
 	}
 	pthread_mutex_lock(data->lock_mutex);
@@ -57,7 +52,8 @@ void	philo_eating(t_list *list)
 	pthread_mutex_unlock(list->data->time_to_eat_mutex);
 	pthread_mutex_lock(list->data->status);
 	if (verify_mutex_stop(list->data))
-		printf("%lli %d is eating\n", get_time() - list->data->start_time, list->philo_id);
+		printf("%lli %d is eating\n", \
+		get_time() - list->data->start_time, list->philo_id);
 	pthread_mutex_lock(list->data->eat_mutex);
 	list->eat_counter++;
 	pthread_mutex_unlock(list->data->eat_mutex);

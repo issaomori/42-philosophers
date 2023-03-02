@@ -6,13 +6,13 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 18:15:35 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/01 13:53:58 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 13:40:36 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static void	check_args(int	argc)
+static void	check_args(int argc)
 {
 	if (argc < 5)
 	{
@@ -23,8 +23,7 @@ static void	check_args(int	argc)
 	{
 		printf("Error: Argument number is more than required\n");
 		exit (1);
-	}
-		
+	}	
 }
 
 static int	is_number(char *argv[])
@@ -32,8 +31,7 @@ static int	is_number(char *argv[])
 	int	i;
 
 	i = 1;
-	while(argv[i])
-	//faço ++i para pular o primeiro argumento passado que no caso é o executavel.
+	while (argv[i])
 	{
 		if (ft_atoi(argv[i]) > 2147483647)
 		{
@@ -47,7 +45,8 @@ static int	is_number(char *argv[])
 		}
 		else if (ft_str_is_numeric(argv[i]) == 0)
 		{
-			printf("Error: Invalid argument, found letter when expecting numbers.\n");
+			printf("Error: Invalid argument, found letter\
+			when expecting numbers.\n");
 			return (1);
 		}
 		i++;
