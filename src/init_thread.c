@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 18:22:37 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/03/02 14:09:22 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/02 19:22:05 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	*daily_activities(t_list *list, t_data *data)
 		return (NULL);
 	}
 	if (list->philo_id % 2 == 0)
-		miliseconds_sleep(5);
+		miliseconds_sleep(list->data->time_to_eat - 5);
+		//deixa os filos pares dormindo, ate os impares terminarem 5 milisegundos antes de merendar.
 	while (verify_mutex_stop(list->data) && (list->eat_counter \
 	< list->data->time_must_eat || list->data->time_must_eat == -1))
 	{

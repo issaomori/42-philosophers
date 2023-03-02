@@ -6,7 +6,7 @@
 #    By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/15 16:27:16 by gissao-m          #+#    #+#              #
-#    Updated: 2023/02/24 18:29:59 by gissao-m         ###   ########.fr        #
+#    Updated: 2023/03/02 19:15:40 by gissao-m         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,21 +20,20 @@ CFLAGS = -pthread -g $(INCLUDE)
 RM = rm -rf
 
 PATH_SRC = ./src/
-PATH_MAIN = $(PATH_SRC)main/
 
 PATH_OBJS = ./objs/
 
-SRC =	$(PATH_MAIN)main.c \
-		$(PATH_MAIN)libft_utils.c \
-		$(PATH_MAIN)check.c \
-		$(PATH_MAIN)eat.c \
-		$(PATH_MAIN)fork.c \
-		$(PATH_MAIN)free.c \
-		$(PATH_MAIN)init_struct.c \
-		$(PATH_MAIN)init_thread.c \
-		$(PATH_MAIN)mutex.c \
-		$(PATH_MAIN)time.c \
-		$(PATH_MAIN)validate_args.c \
+SRC =	$(PATH_SRC)main.c \
+		$(PATH_SRC)libft_utils.c \
+		$(PATH_SRC)check.c \
+		$(PATH_SRC)eat.c \
+		$(PATH_SRC)fork.c \
+		$(PATH_SRC)free.c \
+		$(PATH_SRC)init_struct.c \
+		$(PATH_SRC)init_thread.c \
+		$(PATH_SRC)mutex.c \
+		$(PATH_SRC)time.c \
+		$(PATH_SRC)validate_args.c \
 		
 
 OBJS = $(patsubst $(PATH_SRC)%.c, $(PATH_OBJS)%.o, $(SRC))
