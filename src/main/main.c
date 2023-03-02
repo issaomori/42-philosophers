@@ -6,7 +6,7 @@
 /*   By: gissao-m <gissao-m@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:27:20 by gissao-m          #+#    #+#             */
-/*   Updated: 2023/02/27 13:02:11 by gissao-m         ###   ########.fr       */
+/*   Updated: 2023/03/01 19:41:39 by gissao-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,19 @@
 // pthread_mutex_unlock(&data->stop_mutex);
 // return 1;
 // }
+
+void printPhilos(t_data *data)
+{
+    t_list *list;
+
+    list = data->list;
+
+    while (data->list->next != list) {
+        printf("%i\n", data->list->philo_id);
+        data->list = data->list->next;
+    }
+    printf("%i\n", data->list->philo_id);
+}
 
 int	main(int argc, char *argv[])
 {
